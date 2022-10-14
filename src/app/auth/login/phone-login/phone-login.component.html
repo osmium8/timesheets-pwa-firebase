@@ -1,0 +1,16 @@
+<p-card [style]="{'width': 'fit-content', 'padding-left': '3em', 'padding-right': '3em'}">
+    <h3><strong>Login via OTP</strong></h3>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" [style]="{'margin-top': '1em'}">
+        <div class="field">
+            <input id="phone" formControlName="phone" type="nuber" placeholder="+91-1234567890" autocomplete="off" pInputText/>
+        </div>
+        <button pButton pRipple type="submit" label="Submit" class="p-button-raised" [disabled]="form.invalid || loading">
+        </button>
+        <div class="field">
+            <small *ngIf="serverMessage" class="p-error block">{{serverMessage}}</small>
+        </div>
+    </form>
+    <div id='recaptcha-container'>
+
+    </div>
+</p-card>

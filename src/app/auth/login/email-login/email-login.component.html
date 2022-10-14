@@ -1,0 +1,28 @@
+<p-card [style]="{'width': 'fit-content', 'padding-left': '3em', 'padding-right': '3em'}">
+    <div *ngIf="isSignup">
+        <h3><strong>Create Account</strong></h3>
+        <button pButton pRipple icon="pi pi-arrow-circle-left" type="button" label="Log In" class="p-button-rounded p-button-help" (click)="changeType('login')"></button>
+    </div>
+
+    <div *ngIf="isLogin">
+        <h3><strong>Welcome back</strong></h3>
+        <button pButton pRipple icon="pi pi-user-plus" type="button" label="New User" class="p-button-rounded p-button-help" (click)="changeType('signup')"></button>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" [style]="{'margin-top': '1em'}">
+        <div *ngIf="isSignup" class="field">
+            <input id="name" formControlName="name" type="text" placeholder="Name" autocomplete="off" pInputText/>
+        </div>
+        <div class="field">
+            <input id="email" formControlName="email" type="email" placeholder="Email" autocomplete="off" pInputText/>
+        </div>
+        <div class="field">
+            <input matInput formControlName="password" type="password" placeholder="Password" autocomplete="off" pInputText/>
+        </div>
+        <button pButton pRipple type="submit" label="Submit" class="p-button-raised" [disabled]="form.invalid || loading">
+        </button>
+        <div class="field">
+            <small *ngIf="serverMessage" id="form" class="p-error block">{{serverMessage}}</small>
+        </div>
+    </form>
+</p-card>

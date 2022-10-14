@@ -1,0 +1,38 @@
+<p-messages [(value)]="msgs"></p-messages>
+<div class="grid">
+    <div class="col"></div>
+    <div class="card">
+        <main class="col text-center" [style]="{'width-max': '500px'}">
+            <div *ngIf="!(afAuth.authState | async)">
+                <h1>Login</h1>
+
+                <button pButton pRipple type="button" label="Sign in with Google" class="p-button-raised p-button-text p-button-plain" appGoogleSignin>
+                        <img class="mr-3" src="/assets/google-icon.svg" alt="Google Logo">
+                        <!-- Login -->
+                </button>
+
+                <h5>OR</h5>
+
+                <app-email-login></app-email-login>
+
+                <h5>OR</h5>
+
+                <app-phone-login></app-phone-login>
+            </div>
+
+            <div *ngIf="afAuth.authState | async as user" class="logout">
+                <p>
+                    Logged in as <strong>{{ user.email }}</strong>
+                    <br> <strong>{{ user.displayName }}</strong>
+                </p>
+                <p *ngIf="user.photoURL">
+                    <img [src]="user.photoURL" alt="user photo" />
+                </p>
+                <!-- <p>
+                    uid = <small style="color: grey">{{user.uid}}</small>
+                </p> -->
+            </div>
+        </main>
+    </div>
+    <div class="col"></div>
+</div>

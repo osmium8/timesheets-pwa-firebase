@@ -1,0 +1,90 @@
+<p-toast></p-toast>
+
+<div class="card ml-5 mr-5 mt-5">
+    <!-- <p-toolbar styleClass="mb-4">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+        </ng-template>
+    </p-toolbar> -->
+
+    <p-table class="" #dt [value]="timesheets" [rows]="10" [paginator]="true" [globalFilterFields]="['date']" responsiveLayout="scroll" [(selection)]="selectedTimesheets" [rowHover]="true" dataKey="uid" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true">
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <div>
+                    <button pButton pRipple label="Approve Selected" icon="pi pi-check" class="p-button-success mr-2" (click)="approveSelectedTimesheets()"></button>
+                </div>
+                <h5 class="m-0">Manage Timesheets</h5>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search..." />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 3rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th pSortableColumn="employeeName">Name
+                    <p-sortIcon field="employeeName"></p-sortIcon>
+                </th>
+                <th pSortableColumn="date">Date
+                    <p-sortIcon field="date"></p-sortIcon>
+                </th>
+                <th pSortableColumn="startTime">Start
+                    <p-sortIcon field="startTime"></p-sortIcon>
+                </th>
+                <th pSortableColumn="endTime">End
+                    <p-sortIcon field="endTime"></p-sortIcon>
+                </th>
+                <th>Document</th>
+                <th>Description </th>
+                <th pSortableColumn="status">Status
+                    <p-sortIcon field="status"></p-sortIcon>
+                </th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-timesheet>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="timesheet"></p-tableCheckbox>
+                </td>
+                <td>{{timesheet.employeeName}}</td>
+                <td>{{timesheet.date}}</td>
+                <td>{{timesheet.startTime}}</td>
+                <td>{{timesheet.endTime}}</td>
+                <td>
+                    <button pButton pRipple type="button" icon="pi pi-file-pdf" class="p-button-rounded p-button-help" *ngIf="timesheet.docUrl" (click)="downloadDoc(timesheet.docUrl)"></button>
+                    <button pButton pRipple type="button" icon="pi pi-times-circle" class="p-button-rounded p-button-secondary" *ngIf="!timesheet.docUrl"></button>
+                </td>
+                <td *ngIf="timesheet.status === 'sent'">
+                    <p-tag value="sent" icon="pi pi-clock" severity="info"></p-tag>
+                    <p-tag class="m-1" *ngIf="timesheet.isLeave" value="leave" icon="pi pi-home" severity="warning"></p-tag>
+                </td>
+                <td *ngIf="timesheet.status === 'approved'">
+                    <p-tag value="approved" icon="pi pi-check-circle" severity="success"></p-tag>
+                    <p-tag class="m-1" *ngIf="timesheet.isLeave" value="leave" icon="pi pi-home" severity="warning"></p-tag>
+                </td>
+                <td *ngIf="timesheet.status === 'rejected'">
+                    <p-tag value="rejected" icon="pi pi-times-circle" severity="danger"></p-tag>
+                    <p-tag class="m-1" *ngIf="timesheet.isLeave" value="leave" icon="pi pi-home" severity="warning"></p-tag>
+                </td>
+                <!-- <td><span [class]="'timesheet-badge status-' + (timesheet.status ? timesheet.status.toLowerCase() : '')">{{timesheet.status}}</span></td> -->
+                <!-- <td><span>{{timesheet.status}}</span></td> -->
+                <td *ngIf="timesheet.status === 'sent'">
+                    <button pButton pRipple icon="pi pi-check" type="button" class="p-button-rounded p-button-outlined p-button-success mr-2" (click)="approveTimesheet(timesheet)"></button>
+                    <button pButton pRipple icon="pi pi-times" type="button" class="p-button-rounded p-button-outlined p-button-danger" (click)="rejectTimesheet(timesheet)"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                In total there are {{timesheets ? timesheets.length : 0 }} entries.
+            </div>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

@@ -1,0 +1,8 @@
+<p-menubar [model]="items">
+    <ng-template pTemplate="end">
+        <div *ngIf="auth.authState | async as user">
+            <button pButton pRipple label="Log out" (click)="signOut()" type="button" icon="pi pi-sign-out" class="p-button-rounded p-button-danger p-button-outlined"></button>
+        </div>
+    </ng-template>
+</p-menubar>
+<router-outlet></router-outlet>
