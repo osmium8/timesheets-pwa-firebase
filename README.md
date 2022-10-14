@@ -13,7 +13,7 @@
 
 - [x] Progressive Web Application (cache assets, installable)
 - [x] notifications (Firebase Cloud Messaging + Custom Node.js Server)
-    - [x] <img height="120px" src="/screenshots/notifications.png">
+    - [x] <img height="320px" src="/screenshots/notifications.png">
 - [x] Firebase Authentication
 - [x] Firebase Firestore Database
 - [x] Firebase Storage
