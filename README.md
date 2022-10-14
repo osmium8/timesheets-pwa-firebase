@@ -6,9 +6,23 @@
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 
+### Deployed [here](https://nagp-angular.web.app)
+`https://nagp-angular.web.app`
+
+### Todos
+
 - [x] Progressive Web Application (cache assets, installable)
-- [x] notifications -> Firebase Cloud Messaging + Custom Node.js Server
+- [x] notifications (Firebase Cloud Messaging + Custom Node.js Server)
+    - [x] <img height="120px" src="/screenshots/notifications.png">
 - [x] Firebase Authentication
 - [x] Firebase Firestore Database
 - [x] Firebase Storage
 - [x] Firebase Hosting
+
+### Screenshots
+<img src="/screenshots/admin.png">
+<img src="/screenshots/employee.png">
+<img src="/screenshots/auth.png">
+
+
+
